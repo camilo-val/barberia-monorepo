@@ -1,4 +1,4 @@
-package com.baber.productservice.product_service.model;
+package com.baber.productservice.product_service.model.dto;
 
 import java.util.Date;
 

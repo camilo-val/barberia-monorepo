@@ -4,7 +4,7 @@ import org.springframework.http.MediaType;
 import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.client.WebClient;
 
-import com.baber.productservice.product_service.model.CategoryResponseDto;
+import com.baber.productservice.product_service.model.dto.CategoryResponseDto;
 
 import lombok.AllArgsConstructor;
 
