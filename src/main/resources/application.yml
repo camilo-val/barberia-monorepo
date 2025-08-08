@@ -1,0 +1,20 @@
+spring:
+  application:
+    name: product-service
+  data:
+    mongodb:
+      uri: mongodb+srv://camiloval1999:Ccva1007@cluster0.uwbtkk8.mongodb.net/barber?retryWrites=true&w=majority&appName=Cluster0
+
+server:
+  port: 0
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka
+  instance:
+    instance-id: ${spring.application.name}:${random.uuid}
+
+client:
+    product-category-service:
+        base-url: http://PRODUCT-CATEGORY-SERVICE/product-category-service
