@@ -1,0 +1,11 @@
+rootProject.name = 'barber'
+
+include "discovery-server"
+include "gateway-service"
+include "client-service"
+include "employed-service"
+include "user-service"
+include "product-category-service"
+include "product-service"
+
+
