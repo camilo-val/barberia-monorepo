@@ -1,0 +1,40 @@
+spring:
+  application:
+    name: gateway-service
+  cloud:
+    gateway:
+      server:
+        webflux:
+          routes:
+          - id: PRODUCT-SERVICE
+            uri: lb://PRODUCT-SERVICE/product-service
+            predicates:
+              - Path=/gateway-service/product/**
+            filters:
+              - StripPrefix=2
+          - id: PRODUCT-CATEGORY-SERVICE
+            uri: lb://PRODUCT-CATEGORY-SERVICE
+            predicates:
+              - Path=/gateway-service/product-category/**
+            filters:
+              - StripPrefix=2
+          - id: USER-SERVICE
+            uri: lb://USER-SERVICE/user-service
+            predicates:
+              - Path=/gateway-service/user/**
+            filters:
+              - StripPrefix=2
+          - id: CLIENT-SERVICE
+            uri: lb://CLIENT-SERVICE
+            predicates:
+              - Path=/gateway-service/client/client-service/api/**
+            filters:
+              - StripPrefix=2
+server:
+  port: 8091          
+          
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka
