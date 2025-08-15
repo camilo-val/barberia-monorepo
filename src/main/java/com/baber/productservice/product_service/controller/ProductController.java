@@ -29,7 +29,7 @@ public class ProductController {
     private final ProductService productService;
 
     @GetMapping("/{id}")
-    public ResponseEntity<?> getProductById(@PathVariable Long id) {
+    public ResponseEntity<?> getProductById(@PathVariable("id") Long id) {
         try {
             ProductResponseDto response = ProductResponseDto.tResponseDto(this.productService
                     .findById(id)
@@ -58,7 +58,7 @@ public class ProductController {
     }
 
     @GetMapping("/category/{id}")
-    public ResponseEntity<?> getProductsByCategory(@PathVariable Long id) {
+    public ResponseEntity<?> getProductsByCategory(@PathVariable("id") Long id) {
         List<ProductModel> products = this.productService.findAllByCategoryId(id);
         List<ProductResponseDto> response = new ArrayList<>();
         products.forEach(p -> response.add(ProductResponseDto.tResponseDto(p)));

@@ -22,7 +22,7 @@ public class CategoryController {
     private final CategoryClientService categoryClientService;
 
     @GetMapping("/category-id/{id}")
-    public ResponseEntity<?> getCategory(@PathVariable Long id) {
+    public ResponseEntity<?> getCategory(@PathVariable("id") Long id) {
         try {
             CategoryResponseDto response = this.categoryClientService.getCategory(id);
             System.out.println("Entree: " + id);
