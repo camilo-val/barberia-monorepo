@@ -28,7 +28,7 @@ public class ProductCategoryController {
     private final ProductCategoryService categoryService;
 
     @GetMapping("/{id}")
-    public ResponseEntity<?> getCategoryById(@PathVariable Long id) {
+    public ResponseEntity<?> getCategoryById(@PathVariable("id") Long id) {
         try {
             CategoryResponseDto response = CategoryResponseDto
                     .toCategoryResponseDto(
