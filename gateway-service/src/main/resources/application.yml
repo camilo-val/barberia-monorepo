@@ -7,7 +7,7 @@ spring:
         webflux:
           routes:
           - id: PRODUCT-SERVICE
-            uri: lb://PRODUCT-SERVICE/product-service
+            uri: lb://PRODUCT-SERVICE
             predicates:
               - Path=/gateway-service/product/**
             filters:
@@ -19,7 +19,7 @@ spring:
             filters:
               - StripPrefix=2
           - id: USER-SERVICE
-            uri: lb://USER-SERVICE/user-service
+            uri: lb://USER-SERVICE
             predicates:
               - Path=/gateway-service/user/**
             filters:
@@ -28,6 +28,18 @@ spring:
             uri: lb://CLIENT-SERVICE
             predicates:
               - Path=/gateway-service/client/client-service/api/**
+            filters:
+              - StripPrefix=2
+          - id: employed-service 
+            uri: lb://EMPLOYED-SERVICE
+            predicates:
+              - Path=/gateway-service/employed-service/api/**
+            filters:
+              - StripPrefix=2 
+          - id: transactional-service
+            uri: lb://TRANSACTIONAL-SERVICE
+            predicates:
+              - Path=/gateway-service/transactional-service/api//**
             filters:
               - StripPrefix=2
 server:

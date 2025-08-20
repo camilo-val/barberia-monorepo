@@ -23,7 +23,7 @@ import com.baber.productservice.product_service.service.ProductService;
 import lombok.AllArgsConstructor;
 
 @RestController
-@RequestMapping("/product-service")
+@RequestMapping("/product-service/api")
 @AllArgsConstructor
 public class ProductController {
     private final ProductService productService;
