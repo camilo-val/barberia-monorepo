@@ -1,0 +1,31 @@
+Automatización de pruebas de microservicios consumidor reactivo
+Objetivo general
+Garantizar la calidad del software del microservicio ch_ms_transactional_product_syncronization, aplicando la pirámide de Cohn para diseñar un flujo óptimo de certificación. Se busca implementar pruebas de aceptación automatizadas que optimicen tiempos, recursos y costos, asegurando la correcta sincronización de productos en respuesta a eventos recibidos desde IBM MQ.
+________________________________________
+Objetivos específicos
+Implementar pruebas de aceptación automatizadas para el microservicio.
+Emitir eventos en la cola IBM MQ de forma controlada.
+Validar la persistencia de datos en DynamoDB como criterio de éxito.
+Conectar con IBM MQ y DynamoDB tanto en entornos locales como en AWS.
+Integrar las pruebas en el pipeline CI/CD para ejecución automática.
+Diseñar pruebas reutilizables para microservicios con arquitectura similar.
+Garantizar la calidad del software mediante pruebas alineadas con los estándares del banco.
+________________________________________
+Planteamiento del problema
+En Bancolombia existen estándares y lineamientos para garantizar la calidad del software, entre ellos la aplicación de la pirámide de Cohn en desarrollos e implementaciones. Para cumplir con estos estándares, se deben crear pruebas automatizadas para el microservicio ch_ms_transactional_product_syncronization, encargado de sincronizar productos creados, actualizados o eliminados de un cliente.
+Este microservicio tiene una particularidad: no expone endpoints de consumo, ya que su lógica se activa únicamente al recibir eventos desde una cola IBM MQ. Por lo tanto, la única forma de certificar su comportamiento es simulando eventos en la cola y verificando el resultado en DynamoDB.
+________________________________________
+Desarrollo del problema
+La solución propuesta consiste en diseñar pruebas de aceptación utilizando el framework Karate DSL, complementado con Java para interactuar con IBM MQ y DynamoDB. Se investigará y desarrollará la conexión tanto en entornos locales como en AWS.
+El flujo de prueba será el siguiente:
+Emitir un evento en la cola IBM MQ simulando una acción sobre un producto.
+Esperar a que el microservicio consuma el evento y procese la lógica correspondiente.
+Validar que el registro se haya creado correctamente en DynamoDB.
+La solución será parametrizable por ambiente, utilizando variables del pipeline para configurar secretos y credenciales, permitiendo su ejecución en ambientes de calidad y producción según lo requiera el Product Owner.
+________________________________________
+Justificación
+Esta iniciativa responde a la necesidad del banco de mantener altos estándares de calidad en el software, especialmente en microservicios que no tienen endpoints de consumo y dependen exclusivamente de eventos emitidos por colas como IBM MQ. Automatizar este flujo permite certificar el comportamiento del microservicio de forma eficiente, reduciendo el esfuerzo manual y asegurando la trazabilidad de los datos procesados.
+________________________________________
+Análisis de viabilidad
+La implementación es altamente viable y escalable. Puede adaptarse fácilmente a otros microservicios con arquitectura similar (consumidores de eventos y persistencia en DynamoDB), modificando únicamente la configuración de conexión a AWS y los datos del evento.
+Para su ejecución en ambientes de calidad y producción, será necesario contar con las licencias y secretos correspondientes, los cuales se gestionarán mediante variables de entorno en el pipeline.
