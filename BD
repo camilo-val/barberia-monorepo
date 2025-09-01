@@ -1,0 +1,42 @@
+ --DDL--
+
+CREATE TABLE vuelo (id_vuelo INT IDENTITY(1,1) PRIMARY KEY,
+ origen VARCHAR(50) NOT NULL,
+ destino VARCHAR(50) NOT NULL,
+ fecha DATE NOT NULL,
+ hora TIME NOT NULL,
+ estado VARCHAR(20) NOT NULL);
+
+CREATE TABLE notificacion (id_notificacion INT IDENTITY(1,1) PRIMARY KEY,
+ mensaje TEXT,
+ fecha TIMESTAMP,
+ id_vuelo INT,
+ estado BOOLEAN,
+ CONSTRAINT fk_vuelo_notificacion FOREIGN KEY (id_vuelo) REFERENCES vuelo(id_vuelo)
+ )
+
+CREATE TABLE pasajero (id_pasajero INT IDENTITY(1,1) PRIMARY KEY,
+ nombre VARCHAR(100) NOT NULL,
+ documento VARCHAR(12) NOT NULL);
+
+CREATE TABLE pago (id_pago INT IDENTITY(1,1) PRIMARY KEY,
+ valor_pago DECIMAL(10,2) NOT NULL,
+ estado VARCHAR(30) NOT NULL,
+ fecha_pago TIMESTAMP NOT NULL);
+
+CREATE TABLE reserva ( id_reserva INT IDENTITY(1,1) PRIMARY KEY,
+ id_vuelo INT NOT NULL,
+ id_pasajero INT NOT NULL,
+ CONSTRAINT fk_vuelo_reserva FOREIGN KEY (id_vuelo) REFERENCES vuelo(id_vuelo),
+ CONSTRAINT fk_pasajero_reserva FOREIGN KEY (id_pasajero) REFERENCES pasajero(id_pasajero));
+
+CREATE TABLE pago_reserva( id_reserva INT,
+ id_pago INT, 
+ PRIMARY KEY(id_reserva, id_pago),
+ CONSTRAINT fk_reserva_pago FOREIGN KEY (id_reserva) REFERENCES reserva(id_reserva),
+ CONSTRAINT fk_pago_reserva FOREIGN KEY (id_pago) REFERENCES pago(id_pago));
+
+ --DML--
+ INSERT INTO vuelo(origen, destino, fecha, hora, estado) VALUES ('Bogota','Medellin', GETDATE(), '00:00:00', 'Activo');
+
+
